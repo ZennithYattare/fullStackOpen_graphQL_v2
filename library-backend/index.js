@@ -101,6 +101,7 @@ let books = [
 
 const typeDefs = `
 	type Book {
+		id: ID!
 		title: String!
 		author: String!
 		published: Int!
@@ -108,6 +109,7 @@ const typeDefs = `
 	}
 
 	type Author {
+		id: ID!
 		name: String!
 		born: Int
 		bookCount: Int!
@@ -160,6 +162,7 @@ const resolvers = {
 					(book) => book.author === author.name
 				).length;
 				return {
+					id: author.id,
 					name: author.name,
 					born: author.born,
 					bookCount,
