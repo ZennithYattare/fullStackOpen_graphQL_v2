@@ -161,6 +161,12 @@ const resolvers = {
 				const bookCount = books.filter(
 					(book) => book.author === author.name
 				).length;
+
+				// Ensure the author has an id
+				if (!author.id) {
+					throw new Error(`Author ${author.name} is missing an id`);
+				}
+
 				return {
 					id: author.id,
 					name: author.name,
@@ -175,9 +181,11 @@ const resolvers = {
 		addBook: (root, args) => {
 			const book = { ...args, id: uuid() };
 			books = books.concat(book);
+
 			if (!authors.find((author) => author.name === args.author)) {
-				authors = authors.concat({ name: args.author });
+				authors = authors.concat({ name: args.author, id: uuid() });
 			}
+
 			return book;
 		},
 
