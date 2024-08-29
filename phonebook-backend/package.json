@@ -1,16 +1,20 @@
 {
-  "name": "fullstackopen_graphql_v2",
+  "name": "backend",
   "version": "1.0.0",
-  "description": "Full Stack Open course for GraphQL",
+  "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "dev": "nodemon index.js"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "@apollo/server": "^4.10.5",
-    "graphql": "^16.9.0",
-    "uuid": "^10.0.0"
+    "@apollo/server": "^4.3.2",
+    "dotenv": "^16.0.3",
+    "graphql": "^16.6.0",
+    "jsonwebtoken": "^9.0.0",
+    "mongoose": "^6.9.0",
+    "nodemon": "^2.0.20",
+    "uuid": "^9.0.0"
   }
 }
