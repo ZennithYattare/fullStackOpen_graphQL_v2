@@ -7,15 +7,15 @@ const Authors = (props) => {
 	const [name, setName] = useState("");
 	const [born, setBorn] = useState("");
 
-	if (!props.show) {
-		return null;
-	}
-
 	const authors = useQuery(GET_AUTHORS);
-	
+
 	const [updateAuthorBorn] = useMutation(UPDATE_AUTHOR_BORN, {
 		refetchQueries: [{ query: GET_AUTHORS }],
 	});
+
+	if (!props.show) {
+		return null;
+	}
 
 	const handleSubmit = (event) => {
 		event.preventDefault();
@@ -40,10 +40,9 @@ const Authors = (props) => {
 		setBorn(born);
 	};
 
-  if (authors.loading) {
+	if (authors.loading) {
 		return <div>loading...</div>;
 	}
-
 
 	return (
 		<div>
