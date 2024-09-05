@@ -63,27 +63,30 @@ const Authors = (props) => {
 					))}
 				</tbody>
 			</table>
-			<div>
-				<h2>Set birth year</h2>
-				<form onSubmit={handleSubmit}>
-					<div>
-						<label>Name</label>
-						<select value={name} onChange={handleNameChange}>
-							<option value="">Select an author</option>
-							{authors.data.allAuthors.map((author) => (
-								<option key={author.id} value={author.name}>
-									{author.name}
-								</option>
-							))}
-						</select>
-					</div>
-					<div>
-						<label>Born</label>
-						<input type="number" value={born} onChange={handleBornChange} />
-					</div>
-					<button type="submit">Update author</button>
-				</form>
-			</div>
+			{authors.error && <div>Error: {authors.error.message}</div>}
+			{props.token && (
+				<div>
+					<h2>Set birth year</h2>
+					<form onSubmit={handleSubmit}>
+						<div>
+							<label>Name</label>
+							<select value={name} onChange={handleNameChange}>
+								<option value="">Select an author</option>
+								{authors.data.allAuthors.map((author) => (
+									<option key={author.id} value={author.name}>
+										{author.name}
+									</option>
+								))}
+							</select>
+						</div>
+						<div>
+							<label>Born</label>
+							<input type="number" value={born} onChange={handleBornChange} />
+						</div>
+						<button type="submit">Update author</button>
+					</form>
+				</div>
+			)}	
 		</div>
 	);
 };

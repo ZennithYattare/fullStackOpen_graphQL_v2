@@ -274,6 +274,7 @@ const resolvers = {
 
 				const book = new Book({ author: author._id, ...args });
 				try {
+					await book.validate(); // Explicitly validate the book before saving
 					await book.save();
 				} catch (saveError) {
 					console.log("Error saving book:", saveError.message);
