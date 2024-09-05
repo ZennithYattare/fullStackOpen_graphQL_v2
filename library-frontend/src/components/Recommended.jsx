@@ -45,8 +45,6 @@ const MyBooks = (props) => {
 		return <div>loading...</div>;
 	}
 
-	console.log(booksData);
-	
 	return (
 		<div>
 			<h2>Recommendations</h2>
