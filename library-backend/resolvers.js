@@ -36,7 +36,38 @@ const resolvers = {
 
 			return books;
 		},
-		allAuthors: async () => Author.find({}),
+		allAuthors: async () => {
+			const authorsWithBookCount = await Author.aggregate([
+				{
+					$lookup: {
+						from: "books",
+						localField: "_id",
+						foreignField: "author",
+						as: "books",
+					},
+				},
+				{
+					$addFields: {
+						bookCount: { $size: "$books" },
+					},
+				},
+				{
+					$project: {
+						_id: 1,
+						name: 1,
+						born: 1,
+						bookCount: 1,
+					},
+				},
+			]);
+
+			return authorsWithBookCount.map((author) => ({
+				id: author._id,
+				name: author.name,
+				born: author.born,
+				bookCount: author.bookCount,
+			}));
+		},
 	},
 
 	Mutation: {
