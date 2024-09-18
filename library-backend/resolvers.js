@@ -7,7 +7,6 @@ const Book = require("./models/book");
 const Author = require("./models/author");
 const User = require("./models/user");
 
-
 const resolvers = {
 	Query: {
 		me: (root, args, context) => {
@@ -133,6 +132,8 @@ const resolvers = {
 				// Populate the author field before returning the book
 				const populatedBook = await book.populate("author");
 
+				pubsub.publish("BOOK_ADDED", { bookAdded: populatedBook });
+
 				return populatedBook;
 			} catch (error) {
 				console.log(error.message);
@@ -180,11 +181,12 @@ const resolvers = {
 			}
 		},
 	},
-	// Subscription: {
-	// 	personAdded: {
-	// 		subscribe: () => pubsub.asyncIterator("PERSON_ADDED"),
-	// 	},
-	// },
+
+	Subscription: {
+		bookAdded: {
+			subscribe: () => pubsub.asyncIterator("BOOK_ADDED"),
+		},
+	},
 };
 
 module.exports = resolvers;

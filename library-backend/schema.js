@@ -55,9 +55,10 @@ const typeDefs = `
 			password: String!
 		): Token
 	}
+
+	type Subscription {
+		bookAdded: Book!
+	}	
 `;
-// type Subscription {
-//   personAdded: Person!
-// }
 
 module.exports = typeDefs;
